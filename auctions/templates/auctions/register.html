@@ -31,11 +31,28 @@
                 <form action="{% url 'register' %}" method="post">
                     {% csrf_token %}
                   <div class="form-group" style="position: relative; z-index: 1;">
-                    <input type="text" id="email" class="form-control" autofocus type="text" name="username" placeholder="Usuário ex: joao.silva">
+                    <input type="text" id="username" class="form-control" autofocus type="text" name="username" placeholder="Usuário ex: joao.silva">
                   </div>
                   <div class="form-group" style="position: relative; z-index: 1;">
-                    <input type="email" name="email" placeholder="Email Address" id="text" class="form-control" required readonly>
+                    <input type="email" name="email" placeholder="Email" id="text" class="form-control">
                   </div>
+                  <div class="form-group" style="position: relative; z-index: 1;">
+                    <input type="tel" name="phone_number" placeholder="Telefone" id="phone_number" class="form-control">
+                  </div>
+                  <div class="form-group" style="position: relative; z-index: 1;">
+                    <input type="text" name="full_name" placeholder="Nome completo" id="full_name" class="form-control">
+                  </div>
+                  <div class="form-group" style="position: relative; z-index: 1;">
+                    <input type="text" name="apartament_number" placeholder="N° Apto" id="apartament_number" class="form-control">
+                  </div>
+                  <div class="form-group" style="position: relative; z-index: 1;">
+                    <input type="text" name="tower_number" placeholder="N° Torre" id="tower_number" class="form-control">
+                  </div>
+                  <div class="form-group" style="position: relative; z-index: 1;">
+                    <input type="text" name="phase_number" placeholder="N° Fase" id="phase_number" class="form-control">
+                  </div>
+                  
+                  
                  <!-- <div class="form-group">
                     <input type="password" name="password" placeholder="Password" id="password" class="form-control" required>
                   </div>
@@ -91,19 +108,6 @@ input[type=checkbox]:checked + .checkbox-custom:before {
                 <!-- Adicione esse elemento div vazio no final da página -->
 <div id="termos-popup"></div>
 
-<!--... O restante do código permanece igual ...-->
-
-                <script>
-                  // Get references to the username and email input fields
-                  const usernameInput = document.getElementById('email');
-                  const emailInput = document.getElementById('text');
-                
-                  // Update the email input field whenever the username input field changes
-                  usernameInput.addEventListener('input', (event) => {
-                    const username = event.target.value;
-                    emailInput.value = `${username}@soulisto.com.br`;
-                  });
-                </script>
 
 <script>
   // Get a reference to the terms and conditions link
@@ -157,7 +161,7 @@ input[type=checkbox]:checked + .checkbox-custom:before {
 			<div class="row align-items-center">
 				<div class="col-sm-2">
 					<div class="pl-0 logo">
-						<img src="https://github.com/Natans37/e-commerce-website/blob/master/auctions/static/img/Logo%20simples.png?raw=true" alt="Logo Listo" width="180" height="100">
+						<!--<img src="https://github.com/Natans37/e-commerce-website/blob/master/auctions/static/img/Logo%20simples.png?raw=true" alt="Logo Listo" width="180" height="100">-->
 					</div>
 				</div>
 			</div>
@@ -191,7 +195,7 @@ input[type=checkbox]:checked + .checkbox-custom:before {
 
             </div>
             <footer class="footer">
-   <img src="https://github.com/Natans37/e-commerce-website/blob/master/auctions/static/img/logo_icon.png?raw=true" width="100" height="50" alt="Descrição da imagem do logo" style="float: left;">
+   <!--<img src="https://github.com/Natans37/e-commerce-website/blob/master/auctions/static/img/logo_icon.png?raw=true" width="100" height="50" alt="Descrição da imagem do logo" style="float: left;">-->
    <br><p>Listo &copy; Copyright 2023. Todos os direitos reservados.</p>
 </footer>
 
