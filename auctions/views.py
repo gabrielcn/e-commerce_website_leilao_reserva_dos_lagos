@@ -443,27 +443,34 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
-
-        # Validação de emails Listo
-        with open('emails.txt', 'r') as f:
-            emails_validos = f.read().splitlines()
-
-        if email not in emails_validos:
-            return render(request, "auctions/register.html", {"message": "Entre com um usuário válido."})
-
-        # Generate a random password of length 10 with letters, digits.
         password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+        full_name = request.POST.get('full_name')
+        apartament_number = request.POST.get('apartament_number')
+        tower_number = request.POST.get('tower_number')
+        phase_number = request.POST.get('phase_number')
+        phone_number = request.POST.get('phone_number')
 
-        # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password)
+            user = User.objects.create_user(
+                username=username, 
+                email=email, 
+                password=password,
+                full_name=full_name,
+                apartament_number=apartament_number,
+                tower_number=tower_number,
+                phase_number=phase_number,
+                phone_number=phone_number
+            )
             user.save()
         except IntegrityError:
             return render(request, "auctions/register.html", {
                 "message": "Username already taken."
             })
+        except ValueError:
+            return render(request, "auctions/register.html", {
+                "message": "Invalid input values."
+            })
 
-        # Send password to user's email
         send_mail(
             'Senha para autenticação',
             f'Olá {username},\n\nSua senha é: {password}\n\nPor favor, mantenha segura e não compartilhe com ninguém.\n\n Leilão Listo\n\n\n\n\n',
@@ -476,6 +483,9 @@ def register(request):
         return render(request, "auctions/password_reset_done.html")
     else:
         return render(request, "auctions/register.html")
+
+
+
 
 
 def termos_e_condicoes(request):
