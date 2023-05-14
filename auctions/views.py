@@ -268,7 +268,6 @@ def closebid(request, listingid):
         closebid.images2 = listing.images2
         closebid.images3 = listing.images3
         closebid.category = listing.category
-        closebid.patrimonio = listing.patrimonio
         try:
             bid = Bidding.objects.get(
                 listingid=listingid, bidprice=listing.startingbids)
@@ -505,7 +504,6 @@ def closeallbids(request):
             closebid.images2 = listing.images2
             closebid.images3 = listing.images3
             closebid.category = listing.category
-            closebid.patrimonio = listing.patrimonio
             try:
                 bid = Bidding.objects.filter(listingid=listing.id).order_by('-bidprice')[0]
                 closebid.bidder = bid.bidder
