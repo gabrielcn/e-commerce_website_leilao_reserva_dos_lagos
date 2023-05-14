@@ -7,12 +7,7 @@
         <h1 class="title">Criar Produto</h1>
         <form class="row" method="post">
         {% csrf_token %} <!-- protege o formulário -->
-        <div class="form-field col-lg-6">
-            {{ form.patrimonio|as_crispy_field }} 
-        </div>
-        <div class="form-field col-lg-6">
-            {{ form.idp|as_crispy_field }} 
-        </div>
+    
             <div class="form-field col-lg-6">           
                  {{ form.productnames|as_crispy_field }}
             </div>
