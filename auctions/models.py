@@ -15,8 +15,18 @@ from django.utils.timezone import now
 #     ('entertainment','entertainment'),
 #     )
 
+
 class User(AbstractUser):
     pass
+    full_name = models.CharField(max_length=255)
+    apartament_number = models.CharField(max_length=255)
+    tower_number = models.CharField(max_length=255)
+    phase_number = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.username
+
 
 class Category(models.Model):
     name = models.CharField(max_length=20, null=True, blank=True)
