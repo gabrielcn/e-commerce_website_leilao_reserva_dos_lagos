@@ -93,7 +93,7 @@ def listingpage(request, id):
             ccount = len(ccount)
         try:
 
-            if listing.lister == request.user.username:
+            if listing.lister == request.user.email:
                 lister = True
             else:
                 lister = False
@@ -228,7 +228,7 @@ def bid(request, listingid):
                  # construa a mensagem de e-mail
                 subject = f'Você deu um lance para o {listing.productnames}!'
                 message = f'Você deu um lance para o {listing.productnames} \n\n No valor de R$ {fs.bidprice}.\n \n \n \n'
-                from_email = 'servicedesk@soulisto.com.br'
+                from_email = 'noreplyreservadoslagos@gmail.com'
                 recipient_list = [fs.bidder]
 
                 # envie o e-mail usando o módulo send_mail do Django
@@ -275,14 +275,25 @@ def closebid(request, listingid):
             closebid.finalbid = bid.bidprice
             closebid.save()
             if closebid.bidder != closebid.lister:
-                # construa a mensagem de e-mail
+
+                # construa a mensagem de e-mail do ganhador
                 subject = f'Você ganhou o leilão para o {listing.productnames}!'
                 message = f'Parabéns! Você ganhou o leilão para o {listing.productnames} por R$ {closebid.finalbid}, entre em contato com {closebid.lister}'
-                from_email = 'servicedesk@soulisto.com.br'
+                from_email = 'noreplyreservadoslagos@gmail.com'
                 recipient_list = [bid.bidder]
 
                 # envie o e-mail usando o módulo send_mail do Django
                 send_mail(subject, message, from_email, recipient_list)
+
+                # construa a mensagem de e-mail do vendedor
+                subject = f'Você vendeu o {listing.productnames} no leilão!'
+                message = f'Parabéns! Você vendeu o {listing.productnames} por R$ {closebid.finalbid}, entre em contato com {bid.bidder}'
+                from_email = 'noreplyreservadoslagos@gmail.com'
+                recipient_list = [closebid.lister]
+
+                # envie o e-mail usando o módulo send_mail do Django
+                send_mail(subject, message, from_email, recipient_list)
+
             # bid.delete()
         except:
             closebid.bidder = listing.lister
@@ -467,7 +478,7 @@ def register(request):
             })
         except ValueError:
             return render(request, "auctions/register.html", {
-                "message": "Invalid input values."
+                "message": "Valor de entrada inválido."
             })
 
         send_mail(
@@ -513,11 +524,20 @@ def closeallbids(request):
                 closebid.finalbid = listing.startingbids
             closebid.save()
             if closebid.bidder != closebid.lister:
-                # construa a mensagem de e-mail
+                # construa a mensagem de e-mail do ganhador
                 subject = f'Você ganhou o leilão para o {listing.productnames}!'
                 message = f'Parabéns! Você ganhou o leilão para o {listing.productnames} por R$ {closebid.finalbid}, entre em contato com {closebid.lister}'
-                from_email = 'servicedesk@soulisto.com.br'
+                from_email = 'noreplyreservadoslagos@gmail.com'
                 recipient_list = [bid.bidder]
+
+                # envie o e-mail usando o módulo send_mail do Django
+                send_mail(subject, message, from_email, recipient_list)
+
+                 # construa a mensagem de e-mail do vendedor
+                subject = f'Você vendeu o {listing.productnames} no leilão!'
+                message = f'Parabéns! Você vendeu o {listing.productnames} por R$ {closebid.finalbid}, entre em contato com {bid.bidder}'
+                from_email = 'noreplyreservadoslagos@gmail.com'
+                recipient_list = [closebid.lister]
 
                 # envie o e-mail usando o módulo send_mail do Django
                 send_mail(subject, message, from_email, recipient_list)
@@ -569,9 +589,15 @@ def password_reset_done(request):
     return render(request, 'auctions/password_reset_done.html')
 
 
+@login_required
 def editar_produto(request, id):
     # busca o objeto Listing a ser editado
     listing = get_object_or_404(Listing, id=id)
+
+    # verifica se o usuário é o mesmo que criou o produto
+    if request.user.email != listing.lister:
+        # usuário não tem permissão para editar este produto
+        return redirect('listingpage', id=id)
 
     if request.method == 'POST':
         # cria uma instância do ListingForm, preenchido com os dados do POST
@@ -582,7 +608,6 @@ def editar_produto(request, id):
             form.save()
             # redireciona o usuário para a página de detalhes do produto atualizado
             return redirect('listingpage', id=id)
-            
 
     else:
         # exibe o formulário de edição de produto preenchido com os dados atuais do produto
@@ -590,6 +615,7 @@ def editar_produto(request, id):
 
     context = {'form': form, 'listing': listing}
     return render(request, 'auctions/editar_produto.html', context)
+
 
 
 def change_password(request):
