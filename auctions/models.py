@@ -58,6 +58,7 @@ class Bidding(models.Model):
     descriptions = models.TextField(max_length=500)
     startingbids = models.DecimalField(max_digits=15, decimal_places=2)
     images = models.URLField(blank=True, null=True)
+    lister = models.CharField(max_length=250, blank=True, null=True)
     def __str__(self):
         return f"{self.listingid}"
 
