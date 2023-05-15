@@ -200,6 +200,9 @@ def bid(request, listingid):
 
     descriptions = Listing.objects.get(id=listingid)
     descriptions = descriptions.descriptions
+
+    lister = Listing.objects.get(id=listingid)
+    lister = lister.lister
     
     images = Listing.objects.get(id=listingid)
     images = images.images
@@ -222,10 +225,11 @@ def bid(request, listingid):
                 fs.productnames = productnames
                 fs.descriptions = descriptions
                 fs.startingbids = current
+                fs.lister = lister
                 fs.images = images
                 fs.save()
                 
-                 # construa a mensagem de e-mail
+                 # construa a mensagem de e-mail para o usuário que deu lance
                 subject = f'Você deu um lance para o {listing.productnames}!'
                 message = f'Você deu um lance para o {listing.productnames} \n\n No valor de R$ {fs.bidprice}.\n \n \n \n'
                 from_email = 'noreplyreservadoslagos@gmail.com'
@@ -233,6 +237,15 @@ def bid(request, listingid):
 
                 # envie o e-mail usando o módulo send_mail do Django
                 send_mail(subject, message, from_email, recipient_list) 
+
+                 # construa a mensagem de e-mail para o criador do produto
+                subject = f'Alguém deu um lance para o {listing.productnames}!'
+                message = f'Alguém deu um lance no seu produto: {listing.productnames} \n\n No valor de R$ {fs.bidprice}.\n \n \n \n'
+                from_email = 'noreplyreservadoslagos@gmail.com'
+                recipient_list = [listing.lister]
+
+                # envie o e-mail usando o módulo send_mail do Django
+                send_mail(subject, message, from_email, recipient_list)
                 
             except:
                 fs = bidform.save(commit=False)
