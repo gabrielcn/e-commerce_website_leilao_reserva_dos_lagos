@@ -14,6 +14,9 @@ for item in CATEGORY1:
     categories.append(item)
 
 class ListingForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['startingbids'].widget.attrs['readonly'] = True
     class  Meta:
         model = Listing
         labels = {
