@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 ROOT_URLCONF = 'commerce.urls'
@@ -145,3 +146,8 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'noreplyreservadoslagos@gmail.com'
 EMAIL_HOST_PASSWORD = 'fmnvyyrlkvudfzps'
 DEFAULT_FROM_EMAIL = 'noreplyreservadoslagos@gmail.com'
+
+
+
+SESSION_COOKIE_AGE = 5
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
