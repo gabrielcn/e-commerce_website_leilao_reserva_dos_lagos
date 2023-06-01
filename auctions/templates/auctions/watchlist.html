@@ -175,6 +175,18 @@
     </div>
   </div>
 </div>
+<script>
+  (function() {
+      // Verificar a cada 5 minutos se a sessão expirou
+      setInterval(function() {
+          if (!document.cookie.includes('sessionid')) {
+              // A sessão expirou, redirecionar para a página de login
+              window.location.href = '/sua/pagina/de/login/';
+          }
+      }, 5 * 60 * 1000); // 5 minutos em milissegundos
+  })();
+  </script>
+  
 <!-- END OF WATCHLIST CONTAINER -->
 
 
