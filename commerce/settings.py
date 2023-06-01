@@ -149,5 +149,12 @@ DEFAULT_FROM_EMAIL = 'noreplyreservadoslagos@gmail.com'
 
 
 
-SESSION_COOKIE_AGE = 5
+
+# Definir o tempo de expiração do cookie da sessão em segundos
+SESSION_COOKIE_AGE = 300
+
+# Definir para True para que a sessão expire quando o navegador for fechado
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Definir a URL de redirecionamento quando a sessão expirar
+SESSION_EXPIRE_REDIRECT_URL = 'http://127.0.0.1:8000/login'
