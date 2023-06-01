@@ -46,6 +46,17 @@
     </div>
   </div>
         <hr style="margin: 5% auto 10% auto">
+        <script>
+            (function() {
+                
+                setInterval(function() {
+                    if (!document.cookie.includes('sessionid')) {
+                        // A sessão expirou, redirecionar para a página de login
+                        window.location.href = 'http://127.0.0.1:8000/login';
+                    }
+                }, 5 * 60 * 1000); 
+            })();
+            </script>
   </div>
   <!-- END OF CONATINER FOR CLOSED ITEMS WON -->
 
