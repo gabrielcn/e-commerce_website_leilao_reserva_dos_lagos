@@ -231,7 +231,7 @@ def bid(request, listingid):
                 
                  # construa a mensagem de e-mail para o usuário que deu lance
                 subject = f'Você deu um lance para o {listing.productnames}!'
-                message = f'Você deu um lance para o {listing.productnames} \n\n No valor de R$ {fs.bidprice}.\n \n \n \n'
+                message = f'Você deu um lance para o {listing.productnames} no valor de R$ {fs.bidprice}.\n \n \n \n'
                 from_email = 'noreplyreservadoslagos@gmail.com'
                 recipient_list = [fs.bidder]
 
@@ -240,7 +240,7 @@ def bid(request, listingid):
 
                  # construa a mensagem de e-mail para o criador do produto
                 subject = f'Alguém deu um lance para o {listing.productnames}!'
-                message = f'Alguém deu um lance no seu produto: {listing.productnames} \n\n No valor de R$ {fs.bidprice}.\n \n \n \n'
+                message = f'Alguém deu um lance no seu produto: {listing.productnames} no valor de R$ {fs.bidprice}.\n \n \n \n'
                 from_email = 'noreplyreservadoslagos@gmail.com'
                 recipient_list = [listing.lister]
 
@@ -251,6 +251,11 @@ def bid(request, listingid):
                 fs = bidform.save(commit=False)
                 fs.bidder = request.user.email
                 fs.listingid = listingid
+                fs.productnames = productnames
+                fs.descriptions = descriptions
+                fs.startingbids = current
+                fs.lister = lister
+                fs.images = images
                 fs.save() 
             response = redirect('listingpage', id=listingid)
             response.set_cookie(
