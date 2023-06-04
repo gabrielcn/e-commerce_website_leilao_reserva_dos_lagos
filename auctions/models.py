@@ -42,7 +42,7 @@ class Listing(models.Model):
     images = models.URLField(blank=True, null=True)
     images2 = models.URLField(blank=True, null=True)
     images3 = models.URLField(blank=True, null=True)
-    category = models.CharField(max_length=50, blank=True, null=True, default="")
+    category = models.CharField(max_length=250, blank=True, null=True, default="")
     lister = models.CharField(max_length=50, blank=True, null=True)
     created = models.DateTimeField(default=now, editable=False)
 
