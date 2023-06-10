@@ -501,11 +501,11 @@ def register(request):
 
         send_mail(
             'Senha para autenticação',
-            f'Olá {username},\n\nSua senha é: {password}\n\nPor favor, mantenha segura e não compartilhe com ninguém.\n\n Leilão Reserva dos Lagos\n\n\n\n\n',
+            f'Olá {username},\n\nSua senha é: {password}\n\nPor favor, mantenha segura e não compartilhe com ninguém.\n\n Leilão do Reserva\n\n\n\n\n',
             settings.DEFAULT_FROM_EMAIL,
             [email],
             fail_silently=False,
-            html_message= f'Olá {username},<br> <br> Sua senha é: <strong> {password} </strong> <br> <br> Por favor, mantenha segura e não compartilhe com ninguém. <br> <br> Leilão Reserva dos Lagos <br> <br> <br> <br> <br>'
+            html_message= f'Olá {username},<br> <br> Sua senha é: <strong> {password} </strong> <br> <br> Por favor, mantenha segura e não compartilhe com ninguém. <br> <br> Leilão do Reserva <br> <br> <br> <br> <br>'
         )
 
         return render(request, "auctions/password_reset_done.html")
