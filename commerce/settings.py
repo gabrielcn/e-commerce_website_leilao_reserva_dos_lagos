@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6ps8j!crjgrxt34cqbqn7x&b3y%(fny8k8nh21+qa)%ws3fh!q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -157,4 +157,4 @@ SESSION_COOKIE_AGE = 300
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Definir a URL de redirecionamento quando a sessão expirar
-SESSION_EXPIRE_REDIRECT_URL = 'http://127.0.0.1:8000/login'
+SESSION_EXPIRE_REDIRECT_URL = 'https://leilaodoreserva.onrender.com/login'
