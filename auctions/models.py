@@ -71,7 +71,7 @@ class Bidding(models.Model):
 
 class Watchlist(models.Model):
     productnames = models.CharField(max_length=20)
-    images = models.URLField(blank=True, null=True)
+    images = models.ImageField(upload_to=generate_unique_filename, blank=True, null=True)
     finalbid = models.DecimalField(max_digits=15, decimal_places=2)
     lister = models.CharField(max_length=50, blank=True, null=True)
     watcher = models.CharField(max_length=50, blank=True, null=True)
@@ -82,9 +82,9 @@ class Watchlist(models.Model):
 
 class Closebid(models.Model):
     productnames = models.CharField(max_length=20)
-    images = models.URLField(blank=True, null=True)
-    images2 = models.URLField(blank=True, null=True)
-    images3 = models.URLField(blank=True, null=True)
+    images = models.ImageField(upload_to=generate_unique_filename, blank=True, null=True)
+    images2 = models.ImageField(upload_to=generate_unique_filename, blank=True, null=True)
+    images3 = models.ImageField(upload_to=generate_unique_filename, blank=True, null=True)
     lister = models.CharField(max_length=64, blank=True, null=True)
     bidder = models.CharField(max_length=64, blank=True, null=True)
     listingid = models.IntegerField()
