@@ -52,6 +52,7 @@ def createlisting(request):
     except:
         watchcount = None
     if request.method == "POST":
+        form = ListingForm(request.POST, request.FILES)  # Inclua 'request.FILES' para lidar com os arquivos enviados
         if form.is_valid():
             now = datetime.now()  # save date created with current timezone
             fs = form.save(commit=False)
