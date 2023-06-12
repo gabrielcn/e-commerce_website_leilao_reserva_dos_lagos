@@ -20,9 +20,9 @@ class ListingForm(forms.ModelForm):
             'productnames' : 'Produto',
             'descriptions' : 'Descrição',
             'startingbids' : 'Valor inicial',
-            'images' : 'Imagem URL',
-            'images2': 'Imagem URL',
-            'images3': 'Imagem URL',
+            'images' : 'Carregar Imagem 1',
+            'images2': 'Carregar Imagem 2',
+            'images3': 'Carregar Imagem 3',
             'category' : 'Categoria'
         }
         fields = [
