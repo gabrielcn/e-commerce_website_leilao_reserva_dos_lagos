@@ -98,7 +98,7 @@
             <div class="card h-100">
                 {% if object.images %}
                 <a href="{% url 'listingpage' object.id %}">
-                    <img style="width: 100%; height: 10.3rem auto;" class="card-img-center" src="{{ object.images }}">
+                    <img style="width: 100%; height: 10.3rem auto;" class="card-img-center" src="{{ object.images.url }}">
                 </a>
                 {% else %}
                 <a href="{% url 'listingpage' object.id %}">
