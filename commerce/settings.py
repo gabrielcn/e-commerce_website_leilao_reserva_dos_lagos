@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
-    'crispy_forms'
+    'crispy_forms',
+    'django.core.files',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -158,3 +159,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Definir a URL de redirecionamento quando a sessão expirar
 SESSION_EXPIRE_REDIRECT_URL = 'https://leilaodoreserva.onrender.com/login'
+
+
+MEDIA_URL = '/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '/')
