@@ -8,7 +8,7 @@
     <!-- LEFT COLLUMN -->
         <div class="col-md-7">
               {% if object.images %}
-                    <img class="img-fluid rounded mb-3 mb-md-0" src="{{ object.images }}" style="width:80%;margin:50px;border:10px" class="ml-lg-5 order-1 order-lg-2" alt="No Image Available for {{ object.productnames}}">
+                    <img class="img-fluid rounded mb-3 mb-md-0" src="{{ object.images.url }}" style="width:80%;margin:50px;border:10px" class="ml-lg-5 order-1 order-lg-2" alt="No Image Available for {{ object.productnames}}">
               {% else %}
                     <img class="img-fluid rounded mb-3 mb-md-0" src="https://i.ibb.co/T8nxLQT/No-Image-Available.png" style="width:80%;margin:50px;border:10px" alt="No-Image-Available"> 
               {% endif %}
@@ -22,7 +22,7 @@
             {% if object.bidder == user.email %}
                 <br />
                 <center class="alert alert-success" role="alert" style="margin: 10% auto 5% auto">
-                    <span class="alert-link"> Parabéns! </span> Voce adquiriu este produto!! Entre em contato com o Suporte para receber as orientações.
+                    <span class="alert-link"> Parabéns! </span> Voce adquiriu este produto!! Entre em contato com o dono para receber as orientações.
                </center>
             {% else %}
                 <br />
