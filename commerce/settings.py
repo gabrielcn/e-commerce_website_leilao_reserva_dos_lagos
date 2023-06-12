@@ -161,5 +161,5 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_EXPIRE_REDIRECT_URL = 'https://leilaodoreserva.onrender.com/login'
 
 
-MEDIA_URL = '/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '/')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
