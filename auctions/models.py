@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django import forms
 from django.utils.timezone import now
+from uuid import uuid4
+import os
 
 # CATEGORY = (
 #     ('fashion', 'fashion'), 
@@ -35,13 +37,18 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+def generate_unique_filename(instance, filename):
+    base_filename, ext = os.path.splitext(filename)
+    unique_filename = f"{uuid4().hex}{ext}"
+    return os.path.join("media/img/", unique_filename)
+
 class Listing(models.Model): 
     productnames = models.CharField(max_length=20)
     descriptions = models.TextField(max_length=500)
     startingbids = models.DecimalField(max_digits=15, decimal_places=2)
-    images = models.URLField(blank=True, null=True)
-    images2 = models.URLField(blank=True, null=True)
-    images3 = models.URLField(blank=True, null=True)
+    images = models.ImageField(upload_to=generate_unique_filename, blank=True, null=True)
+    images2 = models.ImageField(upload_to=generate_unique_filename, blank=True, null=True)
+    images3 = models.ImageField(upload_to=generate_unique_filename, blank=True, null=True)
     category = models.CharField(max_length=250, blank=True, null=True, default="")
     lister = models.CharField(max_length=50, blank=True, null=True)
     created = models.DateTimeField(default=now, editable=False)
