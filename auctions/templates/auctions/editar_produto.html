@@ -1,4 +1,7 @@
+
+{% load crispy_forms_tags %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,42 +21,37 @@
     <div class="container mt-3">
       <div class="row justify-content-center">
           <div class="col-md-6">
-              <form method="post" class="form">
-                  {% csrf_token %}
-                  <div class="form-group">
-                      <label>Produto:</label>
-                      {{ form.productnames }}
-                  </div>
-                  <div class="form-group">
-                    <label>Categoria:</label>
-                    {{ form.category }}
-                </div>
-                  <div class="form-group">
-                    <label>Preço:</label>
-                    {{ form.startingbids}}
-                    <div class="text-muted">Atenção! Ao alterar o valor do produto, todos os lances efetuados serão perdidos.</div>
-                </div>
-                <div class="form-group">
-                  <label>Imagem 1 URL:</label>
-                  {{ form.images }}
-              </div>
-              <div class="form-group">
-                <label>Imagem 2 URL:</label>
-                {{ form.images2 }}
-            </div>
-            <div class="form-group">
-              <label>Imagem 3 URL:</label>
-              {{ form.images3 }}
-          </div>
-          <div class="form-group">
-            <label>Descrição: </label>
-            {{ form.descriptions }}
-        </div>
-                  <div class="text-center mt-3">
-                      <button type="submit" class="btn btn-primary mr-2">Salvar</button>
-                      <button type="button" class="btn btn-secondary" onclick="window.history.back();">Voltar</button>
-                  </div>
-              </form>
+            <form class="row" method="post" enctype="multipart/form-data">
+                {% csrf_token %} <!-- protege o formulário -->
+            
+                    <div class="form-field col-lg-6">           
+                         {{ form.productnames|as_crispy_field }}
+                    </div>
+                    <div class="form-field col-lg-12 ">
+                        {{ form.startingbids|as_crispy_field }}
+                    </div>
+                    <div class="form col-lg-6 ">
+                        {{ form.category|as_crispy_field }}
+                    </div>
+                    <div class="form col-lg-12">
+                        
+                        {{ form.images|as_crispy_field }}
+                    </div>
+                    <div class="form col-lg-12">
+                        {{ form.images2|as_crispy_field }}
+                    </div>
+                    <div class="form col-lg-12">
+                        {{ form.images3|as_crispy_field }}
+                    </div>
+                    
+                    <div class="form-field col-lg-12" style="hidden">
+                        {{ form.descriptions|as_crispy_field }}
+                    </div>
+                    <div class="contact-form form-field col-lg-12">
+                        <input class="submit-btn" type="submit" value="Enviar">
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Voltar</button>
+                    </div>
+                </form>
           </div>
       </div>
   </div>
