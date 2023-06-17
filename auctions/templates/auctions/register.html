@@ -31,16 +31,16 @@
                 <form action="{% url 'register' %}" method="post">
                     {% csrf_token %}
                   <div class="form-group" style="position: relative; z-index: 1;">
-                    <input type="text" id="username" class="form-control" autofocus type="text" name="username" placeholder="Usuário">
+                    <input type="text" name="full_name" placeholder="Nome" id="full_name" class="form-control">
                   </div>
                   <div class="form-group" style="position: relative; z-index: 1;">
-                    <input type="email" name="email" placeholder="Email" id="text" class="form-control">
+                    <input type="email" name="email" placeholder="Email" id="email" class="form-control">
+                  </div>
+                  <div class="form-group" style="position: relative; z-index: 1;">
+                    <input type="text" id="username" class="form-control" autofocus type="text" name="username" placeholder="Usuário" required readonly>
                   </div>
                   <div class="form-group" style="position: relative; z-index: 1;">
                     <input type="tel" name="phone_number" placeholder="Telefone formato (DDD) 9XXXX-XXXX" id="phone_number" class="form-control">
-                  </div>
-                  <div class="form-group" style="position: relative; z-index: 1;">
-                    <input type="text" name="full_name" placeholder="Nome completo" id="full_name" class="form-control">
                   </div>
                   <div class="form-group" style="position: relative; z-index: 1;">
                     <input type="text" name="apartament_number" placeholder="N° Apto" id="apartament_number" class="form-control">
@@ -243,6 +243,21 @@ input[type=checkbox]:checked + .checkbox-custom:before {
     // Show the terms and conditions popup by triggering the Bootstrap modal
     const termosModal = new bootstrap.Modal(termosPopup.querySelector('.modal'));
     termosModal.show();
+  });
+</script>
+
+
+<!-- Script auto-complete email e usuário -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      const emailInput = document.getElementById("email");
+      const usernameInput = document.getElementById("username");
+
+      emailInput.addEventListener("input", function() {
+          const email = emailInput.value;
+          const username = email.split("@")[0];
+          usernameInput.value = username;
+      });
   });
 </script>
 
