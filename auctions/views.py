@@ -444,23 +444,32 @@ def allclosed(request):
     })
 
 
+from django.contrib.auth import authenticate, login
+
 def login_view(request):
     if request.method == "POST":
         # Attempt to sign user in
-        username = request.POST["username"]
+        email = request.POST["email"]
         password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
+        
+        # Find the user using the email address
+        user = User.objects.filter(email=email).first()
 
-        # Check if authentication successful
+        # Check if user exists and authenticate
         if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse("index"))
-        else:
-            return render(request, "auctions/login.html", {
-                "message": "Usuário inválido e/ou senha."
-            })
+            user = authenticate(request, username=user.username, password=password)
+
+            # Check if authentication is successful
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse("index"))
+        
+        return render(request, "auctions/login.html", {
+            "message": "Usuário inválido e/ou senha."
+        })
     else:
         return render(request, "auctions/login.html")
+
 
 
 def logout_view(request):
@@ -493,7 +502,7 @@ def register(request):
             user.save()
         except IntegrityError:
             return render(request, "auctions/register.html", {
-                "message": "Username already taken."
+                "message": "Email ou usuário já cadastrado."
             })
         except ValueError:
             return render(request, "auctions/register.html", {
@@ -610,30 +619,30 @@ def password_reset_done(request):
 
 @login_required
 def editar_produto(request, id):
-    # busca o objeto Listing a ser editado
+    # Busca o objeto Listing a ser editado
     listing = get_object_or_404(Listing, id=id)
 
-    # verifica se o usuário é o mesmo que criou o produto
+    # Verifica se o usuário é o mesmo que criou o produto
     if request.user.email != listing.lister:
-        # usuário não tem permissão para editar este produto
+        # O usuário não tem permissão para editar este produto
         return redirect('listingpage', id=id)
 
     if request.method == 'POST':
-        # cria uma instância do ListingForm, preenchido com os dados do POST
-        form = ListingForm(request.POST, instance=listing)
+        # Cria uma instância do ListingForm, preenchido com os dados do POST
+        form = ListingForm(request.POST, request.FILES, instance=listing)
 
         if form.is_valid():
-            # salva o objeto Listing atualizado no banco de dados
+            # Salva o objeto Listing atualizado no banco de dados
             form.save()
-            # redireciona o usuário para a página de detalhes do produto atualizado
+            # Redireciona o usuário para a página de detalhes do produto atualizado
             return redirect('listingpage', id=id)
-
     else:
-        # exibe o formulário de edição de produto preenchido com os dados atuais do produto
+        # Exibe o formulário de edição de produto preenchido com os dados atuais do produto
         form = ListingForm(instance=listing)
 
     context = {'form': form, 'listing': listing}
     return render(request, 'auctions/editar_produto.html', context)
+
 
 
 
