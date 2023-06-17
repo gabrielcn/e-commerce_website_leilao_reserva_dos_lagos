@@ -38,7 +38,7 @@
 
             <div style="color:rgba(106, 199, 43, 0.863); font-size: 15px">
                 {% if user.is_authenticated %}
-                Logado como <strong>{{ user.username }}</strong>
+                Logado como <strong>{{ user.full_name }}</strong>
                 {% else %}
                 Deslogado
                 {% endif %}
