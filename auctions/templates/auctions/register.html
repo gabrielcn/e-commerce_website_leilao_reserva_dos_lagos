@@ -34,7 +34,7 @@
                     <input type="text" name="full_name" placeholder="Nome" id="full_name" class="form-control">
                   </div>
                   <div class="form-group" style="position: relative; z-index: 1;">
-                    <input type="email" name="email" placeholder="Email" id="email" class="form-control">
+                    <input type="email" name="email" placeholder="Email" id="email" class="form-control" onkeyup="converterParaMinusculas()" oninput="converterParaMinusculas()">
                   </div>
                   <div class="form-group" style="position: relative; z-index: 1;">
                     <input type="text" id="username" class="form-control" autofocus type="text" name="username" placeholder="Usuário" required readonly>
@@ -259,6 +259,15 @@ input[type=checkbox]:checked + .checkbox-custom:before {
           usernameInput.value = username;
       });
   });
+</script>
+
+<!-- Script para converter em minúscula o campo de e-mail -->
+
+<script>
+  function converterParaMinusculas() {
+    var input = document.getElementById("email");
+    input.value = input.value.toLowerCase();
+  }
 </script>
 
 
